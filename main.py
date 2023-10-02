@@ -2,18 +2,24 @@
 ETL-Query script
 """
 
+import argparse
+
 from mylib.extract import extract
 from mylib.transform_load import load
 from mylib.query import query
 
-# Extract
-print("Extracting data...")
-extract()
+parser = argparse.ArgumentParser()
+parser.add_argument("--step", choices=["extract", "load", "query"])
+args = parser.parse_args()
 
-# Transform and load
-print("Transforming data...")
-load()
+if args.step == "extract":
+    print("Extracting data...")
+    extract()
 
-# Query
-print("Querying data...")
-query()
+elif args.step == "load":
+    print("Transforming and loading data...")
+    load()
+
+elif args.step == "query":
+    print("Querying data...")
+    query()
